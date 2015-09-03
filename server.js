@@ -39,7 +39,7 @@ var Todo = mongoose.model('Todo', {
   app.post('api/todos', function(req, res) {
       // create a todo, data comes from AJAX req from Angular
       Todo.create({
-        text: req.body.text;
+        text: req.body.text,
         done: false
       }, function(err, todo) {
         if (err) { res.send(err);}
@@ -61,6 +61,12 @@ var Todo = mongoose.model('Todo', {
         res.json(todos);
       });
     });
+  });
+
+  // application
+  app.get('*', function(req, res) {
+    // load the single view file. Angular will handle the page changes on the front end.
+    res.sendFile('./public/index/html');
   });
 
 // listen ==================================
